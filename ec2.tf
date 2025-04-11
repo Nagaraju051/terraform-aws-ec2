@@ -1,9 +1,6 @@
-module "ec2" {
-    source = "../terraform-aws-ec2"
-    sg_id = "sg-0ced5c23281ec037d"
-    instance_type = "t3.small"
-}
-
-output "public_ip" {
-   value =  module.ec2.public_ip
+resource "aws_instance" "this" {
+  ami                    = var.ami_id
+  vpc_security_group_ids = [var.sg_id]
+  instance_type          = var.instance_type
+  tags = var.tags
 }
